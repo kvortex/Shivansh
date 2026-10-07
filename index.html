@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shivansh Root & Leaf | Fresh Fruits, Vegetables & Flowers</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Poppins & Outfit -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        farmGreen: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        },
+                        earth: {
+                            500: '#d97706',
+                            600: '#b45309',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(3deg); }
+        }
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 15px rgba(34, 197, 94, 0.3); }
+            50% { box-shadow: 0 0 30px rgba(34, 197, 94, 0.6); }
+        }
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.96) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .animate-float { animation: floatSlow 4s ease-in-out infinite; }
+        .animate-float-delayed { animation: floatSlow 5s ease-in-out 2s infinite; }
+        .animate-pulse-glow { animation: pulseGlow 3s ease-in-out infinite; }
+        .view-transition { animation: fadeInScale 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #16a34a; border-radius: 4px; }
+    </style>
+</head>
+<body class="bg-farmGreen-50/50 text-gray-800 font-sans antialiased selection:bg-farmGreen-500 selection:text-white">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-farmGreen-900 text-white text-xs md:text-sm py-2 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 text-center">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-location-dot text-farmGreen-400"></i>
+                <span>Nelamangala, Bangalore, 562123</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="tel:+917899338038" class="hover:text-farmGreen-300 transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-phone text-farmGreen-400"></i> +91 78993 38038
+                </a>
+                <a href="mailto:chatwithcharan@gmail.com" class="hover:text-farmGreen-300 transition hidden md:flex items-center gap-1.5">
+                    <i class="fa-solid fa-envelope text-farmGreen-400"></i> chatwithcharan@gmail.com
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-farmGreen-100 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" onclick="switchView('home')" class="flex items-center gap-3 group">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-farmGreen-500 to-farmGreen-700 flex items-center justify-center text-white shadow-md group-hover:scale-105 transition">
+                    <i class="fa-solid fa-seedling text-2xl"></i>
+                </div>
+                <div>
+                    <h1 class="font-heading font-extrabold text-xl md:text-2xl tracking-tight text-farmGreen-900">
+                        SHIVANSH <span class="text-farmGreen-600 font-medium">ROOT & LEAF</span>
+                    </h1>
+                    <p class="text-xs text-gray-500 font-medium tracking-wider uppercase">Freshness Guaranteed</p>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-1 lg:gap-2">
+                <button onclick="switchView('home')" id="nav-home" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold text-farmGreen-800 bg-farmGreen-100 transition">
+                    Home
+                </button>
+                <button onclick="switchView('categories')" id="nav-categories" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold text-gray-600 hover:text-farmGreen-700 hover:bg-farmGreen-50 transition">
+                    Categories
+                </button>
+                <button onclick="switchView('about')" id="nav-about" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold text-gray-600 hover:text-farmGreen-700 hover:bg-farmGreen-50 transition">
+                    About Us
+                </button>
+                <button onclick="switchView('contact')" id="nav-contact" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold text-gray-600 hover:text-farmGreen-700 hover:bg-farmGreen-50 transition">
+                    Contact
+                </button>
+            </nav>
+
+            <!-- Actions -->
+            <div class="flex items-center gap-3">
+                <button onclick="openCartModal()" class="relative bg-farmGreen-50 hover:bg-farmGreen-100 text-farmGreen-800 p-3 rounded-2xl transition flex items-center gap-2 border border-farmGreen-200">
+                    <i class="fa-solid fa-basket-shopping text-lg text-farmGreen-600"></i>
+                    <span class="hidden sm:inline text-sm font-bold">Inquiry List</span>
+                    <span id="cart-badge" class="absolute -top-1.5 -right-1.5 bg-earth-500 text-white text-xs w-6 h-6 rounded-full flex items-center justify-center font-bold shadow-sm">0</span>
+                </button>
+                <!-- Mobile menu toggle -->
+                <button onclick="toggleMobileMenu()" class="md:hidden p-3 rounded-2xl bg-gray-100 text-gray-700 hover:bg-gray-200 transition">
+                    <i class="fa-solid fa-bars text-lg" id="mobile-menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-farmGreen-100 px-4 pt-2 pb-4 space-y-2">
+            <button onclick="switchView('home'); toggleMobileMenu();" class="block w-full text-left px-4 py-2.5 rounded-xl font-medium text-gray-700 hover:bg-farmGreen-50 hover:text-farmGreen-700">Home</button>
+            <button onclick="switchView('categories'); toggleMobileMenu();" class="block w-full text-left px-4 py-2.5 rounded-xl font-medium text-gray-700 hover:bg-farmGreen-50 hover:text-farmGreen-700">Categories</button>
+            <button onclick="switchView('about'); toggleMobileMenu();" class="block w-full text-left px-4 py-2.5 rounded-xl font-medium text-gray-700 hover:bg-farmGreen-50 hover:text-farmGreen-700">About Us</button>
+            <button onclick="switchView('contact'); toggleMobileMenu();" class="block w-full text-left px-4 py-2.5 rounded-xl font-medium text-gray-700 hover:bg-farmGreen-50 hover:text-farmGreen-700">Contact</button>
+        </div>
+    </header>
+
+    <main class="min-h-screen">
+
+        <!-- ==================== HOME VIEW ==================== -->
+        <div id="view-home" class="view-section view-transition">
+            <!-- Hero Section -->
+            <section class="relative overflow-hidden py-16 md:py-24 bg-gradient-to-b from-farmGreen-100/70 via-farmGreen-50/30 to-transparent">
+                <!-- Background floating decorative elements -->
+                <div class="absolute top-10 left-5 text-farmGreen-300/40 text-7xl animate-float pointer-events-none hidden lg:block">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+                <div class="absolute bottom-10 right-10 text-earth-500/20 text-8xl animate-float-delayed pointer-events-none hidden lg:block">
+                    <i class="fa-solid fa-carrot"></i>
+                </div>
+
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                        <!-- Hero Text -->
+                        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                            <div class="inline-flex items-center gap-2 bg-farmGreen-200/60 text-farmGreen-900 px-4 py-2 rounded-full text-xs md:text-sm font-semibold tracking-wide border border-farmGreen-300 shadow-sm animate-pulse-glow">
+                                <i class="fa-solid fa-award text-earth-600"></i> Nelamangala's Trusted Farm-Fresh Vendor
+                            </div>
+                            <h1 class="font-heading font-extrabold text-4xl sm:text-5xl lg:text-6xl text-gray-900 tracking-tight leading-tight">
+                                Freshness Straight From <span class="text-farmGreen-700 underline decoration-farmGreen-400 decoration-wavy underline-offset-8">Roots to Leaves</span>
+                            </h1>
+                            <p class="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto lg:mx-0">
+                                Supplying premium quality exotic & daily vegetables, farm-fresh luscious fruits, and fragrant fresh flowers directly to households and businesses across Nelamangala, Bangalore.
+                            </p>
+                            <!-- CTA Buttons -->
+                            <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                                <button onclick="switchView('categories')" class="w-full sm:w-auto bg-farmGreen-600 hover:bg-farmGreen-700 text-white font-semibold px-8 py-4 rounded-2xl shadow-lg shadow-farmGreen-600/30 hover:scale-105 transition flex items-center justify-center gap-3">
+                                    <i class="fa-solid fa-basket-shopping"></i> Explore Products
+                                </button>
+                                <a href="tel:+917899338038" class="w-full sm:w-auto bg-white hover:bg-farmGreen-50 text-farmGreen-800 font-semibold px-8 py-4 rounded-2xl border-2 border-farmGreen-300 shadow-sm transition flex items-center justify-center gap-3">
+                                    <i class="fa-solid fa-phone text-farmGreen-600"></i> Call Now
+                                </a>
+                            </div>
+
+                            <!-- Trust Badges -->
+                            <div class="grid grid-cols-3 gap-4 pt-8 border-t border-farmGreen-200/60 text-left">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-xl bg-farmGreen-200 flex items-center justify-center text-farmGreen-800 flex-shrink-0">
+                                        <i class="fa-solid fa-truck-fast"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-sm text-gray-900">Fast Delivery</h4>
+                                        <p class="text-xs text-gray-500">Bangalore & Nelamangala</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-xl bg-farmGreen-200 flex items-center justify-center text-farmGreen-800 flex-shrink-0">
+                                        <i class="fa-solid fa-seedling"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-sm text-gray-900">100% Fresh</h4>
+                                        <p class="text-xs text-gray-500">Handpicked daily</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-xl bg-farmGreen-200 flex items-center justify-center text-farmGreen-800 flex-shrink-0">
+                                        <i class="fa-solid fa-hand-holding-dollar"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-sm text-gray-900">Best Pricing</h4>
+                                        <p class="text-xs text-gray-500">Wholesale & retail</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Hero Graphic / Cards Carousel -->
+                        <div class="lg:col-span-5 relative">
+                            <div class="relative w-full aspect-square max-w-md mx-auto rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-tr from-farmGreen-800 to-farmGreen-600 p-2">
+                                <div class="w-full h-full rounded-2xl bg-white overflow-hidden relative flex flex-col items-center justify-center text-center p-6">
+                                    <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#16a34a_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                                    <div class="w-28 h-28 rounded-full bg-farmGreen-100 flex items-center justify-center text-farmGreen-600 text-6xl mb-6 shadow-inner animate-float">
+                                        🥬
+                                    </div>
+                                    <h3 class="font-heading font-bold text-2xl text-farmGreen-900 mb-2">Shivansh Root & Leaf</h3>
+                                    <p class="text-gray-600 text-sm mb-6">Your premier daily supplier for farm fresh veggies, exotic greens, seasonal fruits & fragrant flowers.</p>
+                                    <div class="flex flex-wrap gap-2 justify-center">
+                                        <span class="bg-farmGreen-100 text-farmGreen-800 text-xs px-3 py-1 rounded-full font-medium">Exotic Vegetables</span>
+                                        <span class="bg-amber-100 text-amber-800 text-xs px-3 py-1 rounded-full font-medium">Fresh Fruits</span>
+                                        <span class="bg-pink-100 text-pink-800 text-xs px-3 py-1 rounded-full font-medium">Pooja Flowers</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Floating badge -->
+                            <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-xl border border-farmGreen-100 flex items-center gap-3 animate-float-delayed">
+                                <div class="w-12 h-12 rounded-xl bg-earth-500 text-white flex items-center justify-center text-xl font-bold">
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-500 font-medium">Customer Rating</p>
+                                    <p class="text-base font-extrabold text-gray-900">4.9 / 5.0 (500+ Reviews)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Categories Highlights -->
+            <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <h2 class="text-xs uppercase tracking-widest text-farmGreen-600 font-bold mb-2">Our Offerings</h2>
+                    <h3 class="font-heading font-extrabold text-3xl md:text-4xl text-gray-900">Fresh Produce Categories</h3>
+                    <p class="text-gray-600 mt-2">Explore our extensive range of carefully sorted, farm-fresh goods.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Category Card 1 -->
+                    <div onclick="switchView('categories'); filterCategory('exotic');" class="group bg-white rounded-3xl p-8 shadow-md hover:shadow-xl transition-all duration-300 border border-farmGreen-100 hover:border-farmGreen-400 cursor-pointer relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-farmGreen-100 rounded-bl-full -z-0 opacity-50 group-hover:scale-110 transition"></div>
+                        <div class="w-16 h-16 rounded-2xl bg-farmGreen-100 text-farmGreen-700 flex items-center justify-center text-3xl mb-6 group-hover:bg-farmGreen-600 group-hover:text-white transition duration-300 relative z-10">
+                            🥦
+                        </div>
+                        <h4 class="font-heading font-bold text-xl text-gray-900 mb-2 relative z-10">Exotic Vegetables</h4>
+                        <p class="text-gray-600 text-sm mb-6 relative z-10">Crisp lettuce, colorful bell peppers, tender zucchini, broccoli, baby corn, mushrooms & more.</p>
+                        <span class="inline-flex items-center gap-2 text-farmGreen-600 font-semibold text-sm group-hover:gap-3 transition-all relative z-10">
+                            View Varieties <i class="fa-solid fa-arrow-right"></i>
+                        </span>
+                    </div>
+
+                    <!-- Category Card 2 -->
+                    <div onclick="switchView('categories'); filterCategory('fruits');" class="group bg-white rounded-3xl p-8 shadow-md hover:shadow-xl transition-all duration-300 border border-farmGreen-100 hover:border-farmGreen-400 cursor-pointer relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-amber-100 rounded-bl-full -z-0 opacity-50 group-hover:scale-110 transition"></div>
+                        <div class="w-16 h-16 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-3xl mb-6 group-hover:bg-amber-600 group-hover:text-white transition duration-300 relative z-10">
+                            🥭
+                        </div>
+                        <h4 class="font-heading font-bold text-xl text-gray-900 mb-2 relative z-10">Fresh Fruits</h4>
+                        <p class="text-gray-600 text-sm mb-6 relative z-10">Juicy mangoes, sweet watermarks, strawberries, bananas, apples, seasonal tropical fruits.</p>
+                        <span class="inline-flex items-center gap-2 text-amber-600 font-semibold text-sm group-hover:gap-3 transition-all relative z-10">
+                            View Varieties <i class="fa-solid fa-arrow-right"></i>
+                        </span>
+                    </div>
+
+                    <!-- Category Card 3 -->
+                    <div onclick="switchView('categories'); filterCategory('flowers');" class="group bg-white rounded-3xl p-8 shadow-md hover:shadow-xl transition-all duration-300 border border-farmGreen-100 hover:border-farmGreen-400 cursor-pointer relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-pink-100 rounded-bl-full -z-0 opacity-50 group-hover:scale-110 transition"></div>
+                        <div class="w-16 h-16 rounded-2xl bg-pink-100 text-pink-700 flex items-center justify-center text-3xl mb-6 group-hover:bg-pink-600 group-hover:text-white transition duration-300 relative z-10">
+                            🌸
+                        </div>
+                        <h4 class="font-heading font-bold text-xl text-gray-900 mb-2 relative z-10">Flowers & Greens</h4>
+                        <p class="text-gray-600 text-sm mb-6 relative z-10">Fresh marigolds, roses, jasmine, lotus, curry leaves, coriander & fresh pooja essentials.</p>
+                        <span class="inline-flex items-center gap-2 text-pink-600 font-semibold text-sm group-hover:gap-3 transition-all relative z-10">
+                            View Varieties <i class="fa-solid fa-arrow-right"></i>
+                        </span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Why Choose Us -->
+            <section class="py-16 bg-white border-y border-farmGreen-100">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h2 class="text-xs uppercase tracking-widest text-farmGreen-600 font-bold mb-2">Quality Standards</h2>
+                            <h3 class="font-heading font-extrabold text-3xl md:text-4xl text-gray-900 mb-6">Why Nelamangala Chooses Shivansh Root & Leaf</h3>
+                            <p class="text-gray-600 mb-8">We partner directly with certified local farmers to ensure that every vegetable, fruit, and flower reaches your doorstep with maximum nutritional value and pristine freshness.</p>
+                            
+                            <div class="space-y-4">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-xl bg-farmGreen-100 text-farmGreen-700 flex items-center justify-center font-bold flex-shrink-0 mt-1">
+                                        <i class="fa-solid fa-check"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-900">Rigorous Quality Sorting</h4>
+                                        <p class="text-sm text-gray-500">Every batch is meticulously checked for freshness, size, and ripeness.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-xl bg-farmGreen-100 text-farmGreen-700 flex items-center justify-center font-bold flex-shrink-0 mt-1">
+                                        <i class="fa-solid fa-check"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-900">Hygienic Packaging</h4>
+                                        <p class="text-sm text-gray-500">Clean, food-safe packaging that retains moisture and crispness.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-xl bg-farmGreen-100 text-farmGreen-700 flex items-center justify-center font-bold flex-shrink-0 mt-1">
+                                        <i class="fa-solid fa-check"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-900">Reliable Bulk & Retail Orders</h4>
+                                        <p class="text-sm text-gray-500">Trusted by local families, restaurants, catering services, and temples.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <div class="bg-gradient-to-br from-farmGreen-500 to-farmGreen-800 rounded-3xl p-8 text-white shadow-2xl relative overflow-hidden">
+                                <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl">
+                                    <i class="fa-solid fa-seedling"></i>
+                                </div>
+                                <h3 class="font-heading font-extrabold text-2xl mb-4">Quick Vendor Inquiry</h3>
+                                <p class="text-farmGreen-100 text-sm mb-6">Need regular supplies for your home or business in Bangalore? Reach out to Charan directly!</p>
+                                <div class="space-y-4 mb-8">
+                                    <div class="flex items-center gap-3 bg-white/10 p-3 rounded-2xl">
+                                        <i class="fa-solid fa-phone text-farmGreen-300 text-lg"></i>
+                                        <div>
+                                            <p class="text-xs text-farmGreen-200">Call / WhatsApp</p>
+                                            <a href="tel:+917899338038" class="font-bold text-white hover:underline">+91 78993 38038</a>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-3 bg-white/10 p-3 rounded-2xl">
+                                        <i class="fa-solid fa-envelope text-farmGreen-300 text-lg"></i>
+                                        <div>
+                                            <p class="text-xs text-farmGreen-200">Email Inquiry</p>
+                                            <a href="mailto:chatwithcharan@gmail.com" class="font-bold text-white hover:underline">chatwithcharan@gmail.com</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button onclick="switchView('contact')" class="w-full bg-white text-farmGreen-900 font-bold py-3.5 rounded-xl hover:bg-farmGreen-50 transition shadow-md">
+                                    Send Message
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ==================== CATEGORIES VIEW ==================== -->
+        <div id="view-categories" class="view-section hidden view-transition py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Header -->
+                <div class="text-center max-w-3xl mx-auto mb-10">
+                    <h2 class="text-xs uppercase tracking-widest text-farmGreen-600 font-bold mb-2">Catalog</h2>
+                    <h1 class="font-heading font-extrabold text-3xl md:text-5xl text-gray-900">Explore Our Fresh Produce</h1>
+                    <p class="text-gray-600 mt-2">Select items to add to your inquiry list or order directly via WhatsApp.</p>
+                </div>
+
+                <!-- Filter Tabs -->
+                <div class="flex flex-wrap items-center justify-center gap-2 mb-12">
+                    <button onclick="filterCategory('all')" id="cat-btn-all" class="cat-filter-btn px-6 py-2.5 rounded-full font-semibold text-sm bg-farmGreen-600 text-white shadow-sm transition">
+                        All Items
+                    </button>
+                    <button onclick="filterCategory('exotic')" id="cat-btn-exotic" class="cat-filter-btn px-6 py-2.5 rounded-full font-semibold text-sm bg-white text-gray-700 border border-gray-200 hover:border-farmGreen-500 transition">
+                        Exotic Vegetables
+                    </button>
+                    <button onclick="filterCategory('fruits')" id="cat-btn-fruits" class="cat-filter-btn px-6 py-2.5 rounded-full font-semibold text-sm bg-white text-gray-700 border border-gray-200 hover:border-farmGreen-500 transition">
+                        Fresh Fruits
+                    </button>
+                    <button onclick="filterCategory('flowers')" id="cat-btn-flowers" class="cat-filter-btn px-6 py-2.5 rounded-full font-semibold text-sm bg-white text-gray-700 border border-gray-200 hover:border-farmGreen-500 transition">
+                        Flowers & Greens
+                    </button>
+                </div>
+
+                <!-- Product Grid -->
+                <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <!-- Dynamically populated by JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== ABOUT VIEW ==================== -->
+        <div id="view-about" class="view-section hidden view-transition py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-3xl mx-auto text-center mb-16">
+                    <h2 class="text-xs uppercase tracking-widest text-farmGreen-600 font-bold mb-2">Our Story</h2>
+                    <h1 class="font-heading font-extrabold text-3xl md:text-5xl text-gray-900">Rooted in Quality & Trust</h1>
+                    <p class="text-gray-600 mt-4 text-lg">Serving Nelamangala and Bangalore with uncompromising farm freshness.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+                    <div class="bg-white rounded-3xl p-8 shadow-lg border border-farmGreen-100">
+                        <div class="w-14 h-14 rounded-2xl bg-farmGreen-100 text-farmGreen-700 flex items-center justify-center text-2xl mb-6">
+                            <i class="fa-solid fa-leaf"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-2xl text-gray-900 mb-4">Welcome to Shivansh Root & Leaf</h3>
+                        <p class="text-gray-600 mb-4 leading-relaxed">
+                            Based right in the heart of Nelamangala, Bangalore (PIN: 562123), Shivansh Root & Leaf is founded on a simple mission: to bridge the gap between local farms and conscious consumers who value supreme freshness, pristine hygiene, and honest pricing.
+                        </p>
+                        <p class="text-gray-600 leading-relaxed">
+                            Whether you need daily greens like crisp lettuce and fragrant coriander, vibrant seasonal fruits like Alphonso mangoes and juicy watermelons, or fresh flowers for daily pooja and celebrations, we deliver excellence every single morning.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="bg-farmGreen-600 text-white rounded-3xl p-6 shadow-lg flex flex-col justify-between">
+                            <i class="fa-solid fa-seedling text-3xl mb-4"></i>
+                            <div>
+                                <h4 class="font-extrabold text-3xl mb-1">100%</h4>
+                                <p class="text-farmGreen-100 text-sm font-medium">Farm Fresh Guarantee</p>
+                            </div>
+                        </div>
+                        <div class="bg-white text-gray-900 border border-farmGreen-200 rounded-3xl p-6 shadow-lg flex flex-col justify-between">
+                            <i class="fa-solid fa-users text-3xl text-farmGreen-600 mb-4"></i>
+                            <div>
+                                <h4 class="font-extrabold text-3xl mb-1">500+</h4>
+                                <p class="text-gray-500 text-sm font-medium">Happy Households & Clients</p>
+                            </div>
+                        </div>
+                        <div class="bg-white text-gray-900 border border-farmGreen-200 rounded-3xl p-6 shadow-lg flex flex-col justify-between">
+                            <i class="fa-solid fa-truck text-3xl text-farmGreen-600 mb-4"></i>
+                            <div>
+                                <h4 class="font-extrabold text-3xl mb-1">Daily</h4>
+                                <p class="text-gray-500 text-sm font-medium">Morning Harvest & Dispatch</p>
+                            </div>
+                        </div>
+                        <div class="bg-earth-500 text-white rounded-3xl p-6 shadow-lg flex flex-col justify-between">
+                            <i class="fa-solid fa-award text-3xl mb-4"></i>
+                            <div>
+                                <h4 class="font-extrabold text-3xl mb-1">Top Rated</h4>
+                                <p class="text-amber-100 text-sm font-medium">Vendor in Nelamangala</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Customer Reviews Section -->
+                <div class="mt-20">
+                    <div class="text-center mb-12">
+                        <h2 class="text-xs uppercase tracking-widest text-farmGreen-600 font-bold mb-2">Testimonials</h2>
+                        <h3 class="font-heading font-extrabold text-3xl text-gray-900">What Our Customers Say</h3>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="bg-white p-8 rounded-3xl shadow-sm border border-farmGreen-100 flex flex-col justify-between">
+                            <div>
+                                <div class="flex text-amber-500 gap-1 mb-4 text-sm">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
+                                <p class="text-gray-600 text-sm italic mb-6">"The exotic vegetables like zucchini and bell peppers are always exceptionally fresh. Charan provides wonderful service right here in Nelamangala!"</p>
+                            </div>
+                            <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                                <div class="w-10 h-10 rounded-full bg-farmGreen-100 text-farmGreen-800 font-bold flex items-center justify-center">R</div>
+                                <div>
+                                    <h4 class="font-bold text-sm text-gray-900">Ramesh Kumar</h4>
+                                    <p class="text-xs text-gray-500">Nelamangala Resident</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-3xl shadow-sm border border-farmGreen-100 flex flex-col justify-between">
+                            <div>
+                                <div class="flex text-amber-500 gap-1 mb-4 text-sm">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
+                                <p class="text-gray-600 text-sm italic mb-6">"We order flowers and fresh fruits weekly for our events. Quality is top-notch and pricing is very reasonable. Highly recommended!"</p>
+                            </div>
+                            <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                                <div class="w-10 h-10 rounded-full bg-pink-100 text-pink-800 font-bold flex items-center justify-center">P</div>
+                                <div>
+                                    <h4 class="font-bold text-sm text-gray-900">Priya Sharma</h4>
+                                    <p class="text-xs text-gray-500">Bangalore Caterer</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-3xl shadow-sm border border-farmGreen-100 flex flex-col justify-between">
+                            <div>
+                                <div class="flex text-amber-500 gap-1 mb-4 text-sm">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
+                                <p class="text-gray-600 text-sm italic mb-6">"Super prompt delivery and crisp lettuce and broccoli. Love supporting local vendors like Shivansh Root & Leaf."</p>
+                            </div>
+                            <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                                <div class="w-10 h-10 rounded-full bg-amber-100 text-amber-800 font-bold flex items-center justify-center">A</div>
+                                <div>
+                                    <h4 class="font-bold text-sm text-gray-900">Anand Rao</h4>
+                                    <p class="text-xs text-gray-500">Home Chef</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== CONTACT VIEW ==================== -->
+        <div id="view-contact" class="view-section hidden view-transition py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-3xl mx-auto text-center mb-16">
+                    <h2 class="text-xs uppercase tracking-widest text-farmGreen-600 font-bold mb-2">Get In Touch</h2>
+                    <h1 class="font-heading font-extrabold text-3xl md:text-5xl text-gray-900">We'd Love To Hear From You</h1>
+                    <p class="text-gray-600 mt-4 text-lg">Reach out for daily fresh deliveries, bulk orders, or vendor inquiries.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    <!-- Contact Info Cards -->
+                    <div class="lg:col-span-5 space-y-6">
+                        <div class="bg-white p-8 rounded-3xl shadow-sm border border-farmGreen-100 flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-farmGreen-100 text-farmGreen-700 flex items-center justify-center text-xl flex-shrink-0">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 mb-1">Phone / WhatsApp</h3>
+                                <p class="text-sm text-gray-500 mb-2">Call us directly for instant orders</p>
+                                <a href="tel:+917899338038" class="text-farmGreen-700 font-extrabold text-lg hover:underline">+91 78993 38038</a>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-3xl shadow-sm border border-farmGreen-100 flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-farmGreen-100 text-farmGreen-700 flex items-center justify-center text-xl flex-shrink-0">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 mb-1">Email Address</h3>
+                                <p class="text-sm text-gray-500 mb-2">Send us your inquiry list</p>
+                                <a href="mailto:chatwithcharan@gmail.com" class="text-farmGreen-700 font-extrabold text-base hover:underline">chatwithcharan@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-3xl shadow-sm border border-farmGreen-100 flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-farmGreen-100 text-farmGreen-700 flex items-center justify-center text-xl flex-shrink-0">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 mb-1">Location & Address</h3>
+                                <p class="text-sm text-gray-500">Nelamangala, Bangalore, Karnataka - 562123</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="lg:col-span-7 bg-white p-8 md:p-12 rounded-3xl shadow-xl border border-farmGreen-100">
+                        <h3 class="font-heading font-bold text-2xl text-gray-900 mb-6">Send a Quick Message to Charan</h3>
+                        <form onsubmit="handleContactSubmit(event)" class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Your Full Name</label>
+                                <input type="text" id="contact-name" required class="w-full px-4 py-3 rounded-2xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-farmGreen-500 transition" placeholder="e.g. Rajesh Kumar">
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Phone Number</label>
+                                    <input type="tel" id="contact-phone" required class="w-full px-4 py-3 rounded-2xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-farmGreen-500 transition" placeholder="e.g. +91 98765 43210">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
+                                    <input type="email" id="contact-email" class="w-full px-4 py-3 rounded-2xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-farmGreen-500 transition" placeholder="e.g. rajesh@gmail.com">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Your Requirements / Message</label>
+                                <textarea id="contact-msg" rows="4" required class="w-full px-4 py-3 rounded-2xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-farmGreen-500 transition" placeholder="Mention vegetables, fruits, or flowers you need..."></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-farmGreen-600 hover:bg-farmGreen-700 text-white font-bold py-4 rounded-2xl shadow-lg shadow-farmGreen-600/30 transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-paper-plane"></i> Send Inquiry Now
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-farmGreen-900 text-farmGreen-100 pt-16 pb-12 border-t border-farmGreen-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-farmGreen-600 flex items-center justify-center text-white">
+                            <i class="fa-solid fa-seedling text-xl"></i>
+                        </div>
+                        <h3 class="font-heading font-extrabold text-xl text-white">SHIVANSH ROOT & LEAF</h3>
+                    </div>
+                    <p class="text-sm text-farmGreen-200">
+                        Nelamangala's trusted vendor for fresh exotic vegetables, luscious fruits, and fragrant flowers.
+                    </p>
+                    <div class="flex items-center gap-3 pt-2">
+                        <a href="tel:+917899338038" class="w-10 h-10 rounded-xl bg-farmGreen-800 hover:bg-farmGreen-600 flex items-center justify-center text-white transition"><i class="fa-solid fa-phone"></i></a>
+                        <a href="mailto:chatwithcharan@gmail.com" class="w-10 h-10 rounded-xl bg-farmGreen-800 hover:bg-farmGreen-600 flex items-center justify-center text-white transition"><i class="fa-solid fa-envelope"></i></a>
+                        <a href="https://wa.me/917899338038" target="_blank" class="w-10 h-10 rounded-xl bg-farmGreen-800 hover:bg-farmGreen-600 flex items-center justify-center text-white transition"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white text-base mb-4">Quick Links</h4>
+                    <ul class="space-y-2.5 text-sm">
+                        <li><button onclick="switchView('home')" class="hover:text-white transition">Home</button></li>
+                        <li><button onclick="switchView('categories')" class="hover:text-white transition">Categories</button></li>
+                        <li><button onclick="switchView('about')" class="hover:text-white transition">About Us</button></li>
+                        <li><button onclick="switchView('contact')" class="hover:text-white transition">Contact Us</button></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white text-base mb-4">Our Categories</h4>
+                    <ul class="space-y-2.5 text-sm">
+                        <li><button onclick="switchView('categories'); filterCategory('exotic');" class="hover:text-white transition">Exotic Vegetables</button></li>
+                        <li><button onclick="switchView('categories'); filterCategory('fruits');" class="hover:text-white transition">Fresh Fruits</button></li>
+                        <li><button onclick="switchView('categories'); filterCategory('flowers');" class="hover:text-white transition">Flowers & Greens</button></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white text-base mb-4">Contact Info</h4>
+                    <ul class="space-y-3 text-sm text-farmGreen-200">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-location-dot text-farmGreen-400 mt-1"></i>
+                            <span>Nelamangala, Bangalore, 562123</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-phone text-farmGreen-400"></i>
+                            <a href="tel:+917899338038" class="hover:text-white transition">+91 78993 38038</a>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-envelope text-farmGreen-400"></i>
+                            <a href="mailto:chatwithcharan@gmail.com" class="hover:text-white transition">chatwithcharan@gmail.com</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-farmGreen-800 text-center text-xs text-farmGreen-400 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p>&copy; 2026 Shivansh Root & Leaf. All rights reserved.</p>
+                <p>Vendor: Charan | Location: Nelamangala, Bangalore</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart / Inquiry Modal -->
+    <div id="cart-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative max-h-[90vh] flex flex-col animate-float">
+            <div class="flex items-center justify-between pb-4 border-b border-gray-100">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-farmGreen-100 text-farmGreen-700 flex items-center justify-center">
+                        <i class="fa-solid fa-basket-shopping text-lg"></i>
+                    </div>
+                    <h3 class="font-heading font-bold text-xl text-gray-900">Your Inquiry List</h3>
+                </div>
+                <button onclick="closeCartModal()" class="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 flex items-center justify-center transition">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <div id="cart-items-container" class="py-4 overflow-y-auto flex-grow space-y-4 divide-y divide-gray-100 max-h-60">
+                <!-- Items populated by JS -->
+            </div>
+
+            <div class="pt-4 border-t border-gray-100 mt-auto">
+                <div class="flex justify-between items-center mb-4 font-bold text-gray-900">
+                    <span>Total Est. Items:</span>
+                    <span id="cart-total-count" class="text-farmGreen-700 text-lg">0 items</span>
+                </div>
+                <div class="space-y-3">
+                    <input type="text" id="buyer-name" placeholder="Your Name" class="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-sm focus:outline-none focus:border-farmGreen-500">
+                    <input type="tel" id="buyer-phone" placeholder="Your Phone Number" class="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-sm focus:outline-none focus:border-farmGreen-500">
+                    <button onclick="sendOrderWhatsApp()" class="w-full bg-farmGreen-600 hover:bg-farmGreen-700 text-white font-bold py-3.5 rounded-xl shadow-md transition flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> Send Order Inquiry via WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 bg-gray-900 text-white px-6 py-3 rounded-2xl shadow-xl transform translate-y-20 opacity-0 transition-all duration-300 flex items-center gap-3">
+        <i class="fa-solid fa-circle-check text-farmGreen-400 text-lg"></i>
+        <span id="toast-msg" class="text-sm font-medium">Added to inquiry list!</span>
+    </div>
+
+    <script>
+        // Product Database
+        const products = [
+            // Exotic Vegetables
+            { id: 1, name: "Iceberg Lettuce", category: "exotic", price: "₹60 / pack", image: "🥬", desc: "Crisp, fresh leaves ideal for salads and sandwiches." },
+            { id: 2, name: "Red & Yellow Bell Peppers", category: "exotic", price: "₹120 / kg", image: "🫑", desc: "Vibrant, sweet, and crunchy capsicums." },
+            { id: 3, name: "Zucchini (Green & Yellow)", category: "exotic", price: "₹90 / kg", image: "🥒", desc: "Tender summer squash perfect for grilling and stir-fries." },
+            { id: 4, name: "Fresh Broccoli", category: "exotic", price: "₹80 / pc", image: "🥦", desc: "Nutrient-rich compact florets harvested fresh." },
+            { id: 5, name: "Baby Corn", category: "exotic", price: "₹50 / pack", image: "🌽", desc: "Tender, sweet miniature corn ears." },
+            { id: 6, name: "Button Mushrooms", category: "exotic", price: "₹65 / pack", image: "🍄", desc: "Clean, farm-grown fresh white button mushrooms." },
+            { id: 7, name: "Cherry Tomatoes", category: "exotic", price: "₹70 / 250g", image: "🍅", desc: "Sweet, juicy bite-sized gourmet tomatoes." },
+            { id: 8, name: "Red Cabbage", category: "exotic", price: "₹55 / kg", image: "🥬", desc: "Crisp purple leaves packed with antioxidants." },
+
+            // Fresh Fruits
+            { id: 9, name: "Alphonso / Fresh Mangoes", category: "fruits", price: "₹250 / kg", image: "🥭", desc: "Sweet, pulpy, and luscious seasonal king of fruits." },
+            { id: 10, name: "Fresh Watermelon", category: "fruits", price: "₹40 / kg", image: "🍉", desc: "Hydrating, sweet, and crisp red watermelon." },
+            { id: 11, name: "Fresh Strawberries", category: "fruits", price: "₹150 / pack", image: "🍓", desc: "Plump, sweet-tart farm fresh strawberries." },
+            { id: 12, name: "Cavendish Bananas", category: "fruits", price: "₹50 / dozen", image: "🍌", desc: "Naturally ripened energetic yellow bananas." },
+            { id: 13, name: "Royal Gala Apples", category: "fruits", price: "₹180 / kg", image: "🍎", desc: "Crisp, sweet, and premium quality apples." },
+            { id: 14, name: "Fresh Papaya", category: "fruits", price: "₹60 / pc", image: "🍈", desc: "Ripe, vitamin-rich healthy tropical papaya." },
+            { id: 15, name: "Sweet Pomegranates", category: "fruits", price: "₹160 / kg", image: "🔴", desc: "Ruby red antioxidant-rich fresh arils." },
+            { id: 16, name: "Green Grapes", category: "fruits", price: "₹90 / kg", image: "🍇", desc: "Seedless, crisp, and juicy green grapes." },
+
+            // Flowers & Greens
+            { id: 17, name: "Fresh Marigold (Chendu Malli)", category: "flowers", price: "₹80 / kg", image: "🌼", desc: "Bright orange and yellow fresh pooja flowers." },
+            { id: 18, name: "Red Roses", category: "flowers", price: "₹100 / bunch", image: "🌹", desc: "Freshly plucked fragrant red roses." },
+            { id: 19, name: "Jasmine (Mallige)", category: "flowers", price: "₹120 / measurement", image: "💮", desc: "Enchanting, sweet-scented traditional jasmine." },
+            { id: 20, name: "Fresh Curry Leaves", category: "flowers", price: "₹20 / bunch", image: "🌿", desc: "Aromatic farm-fresh curry leaves for cooking." },
+            { id: 21, name: "Fresh Coriander Leaves", category: "flowers", price: "₹25 / bunch", image: "🌿", desc: "Green, fragrant cilantro leaves." },
+            { id: 22, name: "Lotus Flowers", category: "flowers", price: "₹50 / pc", image: "🪷", desc: "Pure lotus flowers for special poojas and rituals." }
+        ];
+
+        let cart = [];
+
+        // View Switcher Function
+        function switchView(viewId) {
+            document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
+            const target = document.getElementById('view-' + viewId);
+            if (target) {
+                target.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            // Update Nav Active state
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.className = "nav-btn px-4 py-2 rounded-xl text-sm font-semibold text-gray-600 hover:text-farmGreen-700 hover:bg-farmGreen-50 transition";
+            });
+            const activeNav = document.getElementById('nav-' + viewId);
+            if (activeNav) {
+                activeNav.className = "nav-btn px-4 py-2 rounded-xl text-sm font-semibold text-farmGreen-800 bg-farmGreen-100 transition";
+            }
+        }
+
+        // Toggle Mobile Menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('mobile-menu-icon');
+            menu.classList.toggle('hidden');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-xmark');
+        }
+
+        // Render Products
+        function renderProducts(filter = 'all') {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = '';
+
+            const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
+
+            filtered.forEach(p => {
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-3xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 border border-farmGreen-100 flex flex-col justify-between group";
+                card.innerHTML = `
+                    <div>
+                        <div class="w-full aspect-square rounded-2xl bg-farmGreen-50 flex items-center justify-center text-6xl mb-4 group-hover:scale-105 transition duration-300 relative overflow-hidden">
+                            <span class="animate-float">${p.image}</span>
+                            <span class="absolute top-3 right-3 bg-white/80 backdrop-blur-xs text-xs font-bold px-2.5 py-1 rounded-full text-farmGreen-800 shadow-xs uppercase">${p.category}</span>
+                        </div>
+                        <h4 class="font-heading font-bold text-lg text-gray-900 mb-1">${p.name}</h4>
+                        <p class="text-xs text-gray-500 mb-3 line-clamp-2">${p.desc}</p>
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="font-extrabold text-farmGreen-700 text-base">${p.price}</span>
+                            <span class="text-xs text-gray-400 font-medium">Farm Fresh</span>
+                        </div>
+                        <button onclick="addToCart(${p.id})" class="w-full bg-farmGreen-50 hover:bg-farmGreen-600 text-farmGreen-800 hover:text-white font-semibold py-3 rounded-xl transition flex items-center justify-center gap-2 border border-farmGreen-200 hover:border-transparent shadow-xs">
+                            <i class="fa-solid fa-plus"></i> Add to Inquiry List
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Filter Category helper
+        function filterCategory(cat) {
+            renderProducts(cat);
+            document.querySelectorAll('.cat-filter-btn').forEach(btn => {
+                btn.className = "cat-filter-btn px-6 py-2.5 rounded-full font-semibold text-sm bg-white text-gray-700 border border-gray-200 hover:border-farmGreen-500 transition";
+            });
+            const activeBtn = document.getElementById('cat-btn-' + cat);
+            if (activeBtn) {
+                activeBtn.className = "cat-filter-btn px-6 py-2.5 rounded-full font-semibold text-sm bg-farmGreen-600 text-white shadow-sm transition";
+            }
+        }
+
+        // Cart Management
+        function addToCart(productId) {
+            const item = products.find(p => p.id === productId);
+            if (!item) return;
+
+            const existing = cart.find(i => i.id === productId);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({ ...item, qty: 1 });
+            }
+
+            updateCartBadge();
+            showToast(`Added ${item.name} to inquiry list!`);
+        }
+
+        function updateCartBadge() {
+            const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+            document.getElementById('cart-badge').innerText = totalQty;
+        }
+
+        function openCartModal() {
+            const modal = document.getElementById('cart-modal');
+            const container = document.getElementById('cart-items-container');
+            container.innerHTML = '';
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-8 text-gray-400">
+                        <i class="fa-solid fa-basket-shopping text-4xl mb-3 text-gray-300"></i>
+                        <p class="text-sm font-medium">Your inquiry list is empty.</p>
+                        <p class="text-xs text-gray-400 mt-1">Explore our categories and add fresh items!</p>
+                    </div>
+                `;
+                document.getElementById('cart-total-count').innerText = "0 items";
+            } else {
+                let totalItems = 0;
+                cart.forEach(item => {
+                    totalItems += item.qty;
+                    const row = document.createElement('div');
+                    row.className = "py-3 flex items-center justify-between gap-4";
+                    row.innerHTML = `
+                        <div class="flex items-center gap-3">
+                            <span class="text-3xl">${item.image}</span>
+                            <div>
+                                <h4 class="font-bold text-sm text-gray-900">${item.name}</h4>
+                                <p class="text-xs text-farmGreen-600 font-semibold">${item.price}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button onclick="updateQty(${item.id}, -1)" class="w-8 h-8 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition font-bold">-</button>
+                            <span class="text-sm font-bold w-6 text-center">${item.qty}</span>
+                            <button onclick="updateQty(${item.id}, 1)" class="w-8 h-8 rounded-lg bg-farmGreen-100 text-farmGreen-800 hover:bg-farmGreen-200 transition font-bold">+</button>
+                        </div>
+                    `;
+                    container.appendChild(row);
+                });
+                document.getElementById('cart-total-count').innerText = totalItems + " items";
+            }
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeCartModal() {
+            const modal = document.getElementById('cart-modal');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }
+
+        function updateQty(id, delta) {
+            const item = cart.find(i => i.id === id);
+            if (item) {
+                item.qty += delta;
+                if (item.qty <= 0) {
+                    cart = cart.filter(i => i.id !== id);
+                }
+            }
+            updateCartBadge();
+            openCartModal();
+        }
+
+        function sendOrderWhatsApp() {
+            const name = document.getElementById('buyer-name').value.trim();
+            const phone = document.getElementById('buyer-phone').value.trim();
+
+            if (!name || !phone) {
+                showToast("Please enter your name & phone number!");
+                return;
+            }
+
+            if (cart.length === 0) {
+                showToast("Your inquiry list is empty!");
+                return;
+            }
+
+            let text = `Hello Charan, I would like to inquire about fresh produce from Shivansh Root & Leaf:\n\n`;
+            text += `*Customer:* ${name}\n*Phone:* ${phone}\n\n*Items:*\n`;
+            cart.forEach((i, index) => {
+                text += `${index + 1}. ${i.name} (Qty: ${i.qty}) - ${i.price}\n`;
+            });
+            text += `\nPlease confirm availability and delivery to Nelamangala/Bangalore.`;
+
+            const encoded = encodeURIComponent(text);
+            window.open(`https://wa.me/917899338038?text=${encoded}`, '_blank');
+        }
+
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('contact-name').value;
+            const phone = document.getElementById('contact-phone').value;
+            const msg = document.getElementById('contact-msg').value;
+
+            let text = `Hello Charan, Inquiry from Website:\n*Name:* ${name}\n*Phone:* ${phone}\n*Message:* ${msg}`;
+            const encoded = encodeURIComponent(text);
+            window.open(`https://wa.me/917899338038?text=${encoded}`, '_blank');
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // Initialize products on load
+        window.onload = function() {
+            renderProducts('all');
+        };
+    </script>
+</body>
+</html>
